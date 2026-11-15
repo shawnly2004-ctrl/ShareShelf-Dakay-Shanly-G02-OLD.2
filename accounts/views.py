@@ -4,6 +4,7 @@ from .decorators import role_required
 from .models import User
 from django.contrib import messages
 from .forms import RegisterForm
+from .forms import RegisterForm, ProfileForm
 
 @login_required
 def dashboard_redirect(request):
@@ -39,3 +40,17 @@ def register(request):
         messages.error(request, 'Please fix the errors below.')
     return render(request, 'accounts/register.html', {'form': form})
 
+@login_required
+def profile(request):
+    return render(request, 'accounts/profile.html')
+
+@login_required
+def profile_edit(request):
+    form = ProfileForm(request.POST or None, request.FILES or None, instance=request.user)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated.')
+            return redirect('profile')
+        messages.error(request, 'Please fix the errors below.')
+    return render(request, 'accounts/profile_edit.html', {'form': form})
