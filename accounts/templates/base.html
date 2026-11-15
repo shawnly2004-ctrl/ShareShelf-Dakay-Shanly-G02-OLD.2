@@ -11,6 +11,7 @@
     </form>
   {% else %}
     <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'register' %}">Register</a>
   {% endif %}
 </nav>
 {% for m in messages %}<p class="{{ m.tags }}">{{ m }}</p>{% endfor %}
