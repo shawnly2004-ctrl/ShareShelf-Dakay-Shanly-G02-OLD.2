@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block nav %}
+  <a href="#">Browse Items</a>
+  {% if user.can_lend %}<a href="#">My Listings</a>{% endif %}
+  {% if user.can_borrow %}<a href="#">My Requests</a>{% endif %}
+  <a href="#">Wishlist</a>
+  <a href="#">Notifications</a>
+{% endblock %}
+{% block content %}
+<h2>Welcome, {{ user.first_name|default:user.username }}!</h2>
+<p>Account type: {{ user.get_account_type_display }}</p>
+<h3>Nearby available items</h3><p>Coming in Sprint 3.</p>
+<h3>Pending requests</h3><p>Coming in Sprint 3.</p>
+<h3>Borrow / lend history</h3><p>Coming in Sprint 4.</p>
+{% endblock %}
