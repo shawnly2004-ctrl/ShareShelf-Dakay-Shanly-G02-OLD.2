@@ -7,7 +7,7 @@
   <a href="#">Notifications</a>
 {% endblock %}
 {% block content %}
-<h2>Welcome, {{ user.first_name|default:user.username }}!</h2>
+<h2>Welcome, {{ user.first_name|default:user.email }}!</h2>
 <p>Account type: {{ user.get_account_type_display }}</p>
 <h3>Nearby available items</h3><p>Coming in Sprint 3.</p>
 <h3>Pending requests</h3><p>Coming in Sprint 3.</p>

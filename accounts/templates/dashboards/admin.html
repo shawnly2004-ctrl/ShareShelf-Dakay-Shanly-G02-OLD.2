@@ -6,7 +6,7 @@
 {% endblock %}
 {% block content %}
 <h2>Admin Dashboard</h2>
-<p>Welcome, {{ user.first_name|default:user.username }}!</p>
+<p>Welcome, {{ user.first_name|default:user.email }}!</p>
 <ul>
   <li>Total members: {{ total_users }}</li>
   <li>Lenders: {{ lenders }}</li>
@@ -15,7 +15,7 @@
 <h3>Newest members</h3>
 <ul>
   {% for u in recent_users %}
-    <li>{{ u.username }} ({{ u.get_account_type_display }})</li>
+    <li>{{ u.email }} ({{ u.get_account_type_display }})</li>
   {% empty %}<li>No members yet.</li>{% endfor %}
 </ul>
 {% endblock %}

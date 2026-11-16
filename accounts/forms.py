@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User
 
 
@@ -12,7 +12,7 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email',
+        fields = ['first_name', 'last_name', 'email',
                   'contact_number', 'barangay', 'account_type',
                   'password1', 'password2']
 
@@ -21,6 +21,13 @@ class RegisterForm(UserCreationForm):
         if User.objects.filter(email__iexact=email).exists():
             raise forms.ValidationError('This email is already registered.')
         return email
+
+
+class EmailLoginForm(AuthenticationForm):
+    username = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'autofocus': True}))
+
+    def clean_username(self):
+        return self.cleaned_data['username'].lower()
 
 
 class ProfileForm(forms.ModelForm):
